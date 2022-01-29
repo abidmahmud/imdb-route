@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Movies from './component/movies.component';
+import Navbar from './component/navbar.component';
+import { Redirect, Switch, Route } from "react-router-dom";
+import SignUp from './component/sign-up.component';
+import LogIn from './component/log-in.component';
+import Home from './component/home.component';
+import NotFound from './component/not-found.component';
+import CreateMovie from './component/create-movie.component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    return (
+        <>
+            <Navbar />
+
+            <Switch>
+                <Route path="/movies" render={(props) => <Movies  {...props} />} />
+                <Route path="/sign-up" render={(props) => <SignUp  {...props} />} />
+                <Route path="/log-in" render={(props) => <LogIn  {...props} />} />
+                <Route path="/create-movie" render={(props) => <CreateMovie  {...props} />} />
+                <Route path="/not-found" component={NotFound} />
+                <Route exact path="/" render={(props) => <Home  {...props} />} />
+                <Redirect to="/not-found" />
+            </Switch>
+        </>
+    );
 }
 
 export default App;
